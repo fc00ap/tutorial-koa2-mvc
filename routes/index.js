@@ -6,6 +6,15 @@ router.get('/', async (ctx, next) => {
   })
 })
 
+// router.get('/', function (ctx, next) {
+//   ctx.state = {
+//     title: 'koa2 title'
+//   };
+
+//   return ctx.render('index', {
+//   });
+// })
+
 router.get('/string', async (ctx, next) => {
   ctx.body = 'koa2 string'
 })

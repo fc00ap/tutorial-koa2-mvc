@@ -32,6 +32,15 @@ app.use(async (ctx, next) => {
   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
 })
 
+// logger
+// app.use( (ctx, next) => {
+//   const start = new Date();
+//   return next().then(function(){
+//     const ms = new Date() - start;
+//     console.log(`${ctx.method} ${ctx.url} - ${ms}ms`);
+//   });
+// });
+
 // routes
 app.use(index.routes(), index.allowedMethods())
 app.use(users.routes(), users.allowedMethods())
