@@ -6,8 +6,9 @@ const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 
-const index = require('./routes/index')
-const users = require('./routes/users')
+const index = require('./app/routes/index')
+const users = require('./app/routes/users')
+
 
 // error handler
 onerror(app)
@@ -20,8 +21,8 @@ app.use(json())
 app.use(logger())
 app.use(require('koa-static')(__dirname + '/public'))
 
-app.use(views(__dirname + '/views', {
-  extension: 'pug'
+app.use(views(__dirname + '/app/views', {
+  extension: 'ejs'
 }))
 
 // logger
@@ -44,6 +45,10 @@ app.use(async (ctx, next) => {
 // routes
 app.use(index.routes(), index.allowedMethods())
 app.use(users.routes(), users.allowedMethods())
+
+
+const mongoConf = require('./config/mongo');
+mongoConf.connect();
 
 // error-handling
 app.on('error', (err, ctx) => {
